@@ -1,0 +1,89 @@
+// Configuration
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+// Overrides
+$navbar-padding-y: 0;
+$navbar-nav-link-padding-x: 1rem;
+$navbar-toggler-font-size: 2rem;
+$navbar-light-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+
+$input-padding-x: 1.5rem;
+$form-floating-height:                  add(5rem, $input-height-border);
+$form-floating-line-height:             1.25;
+$form-floating-padding-x:               $input-padding-x;
+$form-floating-padding-y:               1.5rem;
+$form-floating-input-padding-t:         1.5rem;
+$form-floating-input-padding-b:         0;
+$form-floating-label-height:            1.5rem;
+$form-floating-label-opacity:           1;
+$form-floating-label-transform:         scale(.85) translateY(-1rem) translateX(.15rem);
+$form-floating-label-disabled-color:    $gray-600;
+$form-floating-transition:              opacity .1s ease-in-out, transform .1s ease-in-out;
+
+$toast-max-width:                   40rem;
+$toast-padding-x:                   .75rem;
+$toast-padding-y:                   1rem;
+$toast-font-size:                   2rem;
+$toast-color:                       null;
+$toast-background-color:            rgba(var(--#{$prefix}body-bg-rgb), .85);
+$toast-border-width:                var(--#{$prefix}border-width);
+$toast-border-color:                var(--secondary);
+$toast-border-radius:               var(--#{$prefix}border-radius);
+$toast-box-shadow:                  var(--#{$prefix}box-shadow);
+$toast-spacing:                     $container-padding-x;
+$toast-header-color:                var(--green);
+$toast-header-background-color:     rgba(var(--#{$prefix}body-bg-rgb), .85);
+$toast-header-border-color:         $toast-border-color;
+
+$btn-close-width:            1em;
+$btn-close-height:           $btn-close-width;
+$btn-close-padding-x:        .25em;
+$btn-close-padding-y:        $btn-close-padding-x;
+$btn-close-color:            $black;
+$btn-close-bg:               url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#222627'><path d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/></svg>");
+$btn-close-focus-shadow:     $focus-ring-box-shadow;
+$btn-close-opacity:          .5;
+$btn-close-hover-opacity:    .75;
+$btn-close-focus-opacity:    1;
+$btn-close-disabled-opacity: .25;
+$btn-close-white-filter:     invert(1) grayscale(100%) brightness(200%);
+
+
+$utilities: (
+  "viewport-width": (
+    property: width,
+    class: vw,
+    values: (100: 100vw, 50: 50vw)
+  ),
+  "viewport-height": (
+    property: height,
+    class: vh,
+    values: (100: 100vh, 50: 50vh)
+  ),
+);
+
+@import "~bootstrap/scss/variables-dark";
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+
+// Layout & components
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+@import '~bootstrap/scss/navbar';
+@import '~bootstrap/scss/card';
+@import '~bootstrap/scss/transitions';
+@import '~bootstrap/scss/forms';
+@import '~bootstrap/scss/spinners';
+@import '~bootstrap/scss/toasts';
+@import '~bootstrap/scss/close';
+
+// Helpers
+@import "~bootstrap/scss/helpers";
+
+// Utilities
+@import "~bootstrap/scss/utilities/api";

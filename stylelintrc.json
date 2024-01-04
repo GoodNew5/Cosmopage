@@ -1,0 +1,14 @@
+{
+  "extends": "stylelint-config-standard-scss",
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["extends", "include"]
+      }
+    ],
+    "custom-property-empty-line-before": "never",
+    "block-no-empty": null,
+    "unit-allowed-list": ["em", "vh", "vw", "rem", "%", "s", "deg"]
+  }
+}
