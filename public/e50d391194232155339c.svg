@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <defs>
+    <filter id="a" width="400%" height="400%" x="-100%" y="-100%" color-interpolation-filters="sRGB"
+      filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+      <feGaussianBlur width="100%" height="100%" x="0%" y="0%" in="SourceGraphic" result="blur" stdDeviation="92" />
+    </filter>
+  </defs>
+  <g filter="url(#a)">
+    <ellipse cx="327.645" cy="282.306" fill="#ff623f" rx="143" ry="160.5" />
+    <ellipse cx="408.886" cy="424.449" fill="#44d" rx="143" ry="160.5" />
+  </g>
+</svg>

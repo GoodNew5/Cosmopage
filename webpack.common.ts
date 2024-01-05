@@ -5,16 +5,14 @@ import webpack from 'webpack'
 import 'webpack-dev-server'
 
 const config: webpack.Configuration = {
-  entry: './src/index.ts',
+  context: path.resolve(__dirname, './src'),
+  entry: './index.ts',
   resolve: {
     extensions: ['.ts', '.js'],
     alias: {
-      '@assets': path.resolve(__dirname, './public/assets')
-    }
-  },
-  output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+      '@assets': path.resolve(__dirname, 'src/assets')
+    },
+    roots: [path.resolve(__dirname, 'src/assets')]
   },
   plugins: [
     new ProvidePlugin({
@@ -22,15 +20,20 @@ const config: webpack.Configuration = {
       jQuery: 'jquery'
     }),
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      inject: 'body'
+      template: './index.html',
+      publicPath: './'
     })
   ],
   module: {
     rules: [
       {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-        type: 'asset'
+        test: /\.html$/i,
+        loader: 'html-loader',
+        options: {}
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|webp|gif)$/i,
+        type: 'asset/resource'
       },
       {
         test: /\.(sa|sc|c)ss$/,

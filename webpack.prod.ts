@@ -15,22 +15,13 @@ const config = merge(common, {
   mode: 'production',
   devtool: false,
   output: {
-    filename: 'bundle.js',
-    path: path.join(__dirname, 'public')
+    filename: '[name][contenthash].js',
+    path: path.join(__dirname, './public'),
+    clean: true
   },
   optimization: {
     nodeEnv: process.env.NODE_ENV,
-    minimize: true,
-    splitChunks: {
-      cacheGroups: {
-        styles: {
-          name: 'styles',
-          test: /\.css$/,
-          chunks: 'all',
-          enforce: true
-        }
-      }
-    }
+    minimize: true
   },
   plugins: [
     new MiniCssExtractPlugin({

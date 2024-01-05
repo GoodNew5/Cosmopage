@@ -4,15 +4,13 @@ import path from 'path'
 import common from './webpack.common'
 
 const config = merge(common, {
+  context: path.resolve(__dirname, './src'),
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
     hot: false,
     host: 'localhost',
-    compress: true,
-    static: {
-      directory: path.join(__dirname, 'public')
-    }
+    compress: true
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]
 })

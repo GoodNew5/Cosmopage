@@ -1,4 +1,5 @@
 import './scss/main.scss'
+// import './assets/svg/logo.svg'
 import BrowserDetector from 'browser-dtector'
 import Toast from 'bootstrap/js/dist/toast'
 import Collapse from 'bootstrap/js/dist/collapse'
