@@ -9,7 +9,7 @@ const config = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     hot: false,
-    host: 'localhost',
+    host: '0.0.0.0',
     compress: true
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]

@@ -226,7 +226,7 @@
 }
 
 .comet-3 {
-  animation: falling2 6s 1s infinite;
+  animation: falling2 6s infinite;
   left: 30vw;
   height: 7rem;
   width: .4rem;
@@ -236,7 +236,7 @@
 .comet-4 {
   height: 1.1rem;
   width: .3rem;
-  animation: falling 4s 2s infinite;
+  animation: falling 4s infinite;
   left: 10dvw;
   background-color: var(--yellow);
 }
@@ -292,21 +292,24 @@ body {
   display: flex;
   font-size: 1.4rem;
   scrollbar-gutter: stable;
-  -webkit-tap-highlight-color: initial;
+  -webkit-tap-highlight-color: unset;
   background-color: var(--color-5);
   color: var(--black);
   overscroll-behavior: none;
-  padding-top: 9rem;
-
-  @include media-breakpoint-up(md) {
-    padding-top: 14rem;
-  }
 }
 
 .header {
   background: var(--secondary);
   @include media-breakpoint-up(md) {
     padding: 2rem 0;
+  }
+}
+
+.comsompage {
+  transform: translateY(9rem);
+
+  @include media-breakpoint-up(md) {
+    transform: translateY(14rem);
   }
 }
 
@@ -484,12 +487,14 @@ body {
 
   object-fit: cover;
   object-position: center;
-  filter: contrast(0.6);
   height: 50rem;
+  position: relative;
+  will-change: filter;
+  filter: contrast(0.6);
 }
 
 .section-viewport {
-  min-height: calc(100dvh - 9rem);
+  min-height: calc(100svh - 9rem);
   will-change: opacity;
   padding: 2rem 0;
   border-bottom: 0.1rem var(--color-4) solid;
@@ -499,18 +504,14 @@ body {
     scroll-snap-type: initial;
   }
 
-  @media (prefers-reduced-motion) {
-    transition: none;
-  }
-
   @include media-breakpoint-up(md) {
-    min-height: calc(100dvh - 14rem);
+    min-height: calc(100svh - 14rem);
     padding: 5rem 0;
   }
 }
 
 .section-viewport--hidden {
-  animation: anim2 ease-in-out 0.5s both;
+  animation: anim2 0.5s both;
 
   @media (prefers-reduced-motion) {
     animation: none;
@@ -518,7 +519,7 @@ body {
 }
 
 .section-viewport--visible {
-  animation: anim1 0.5s ease-in 1s both;
+  animation: anim1 0.5s both;
 
   @media (prefers-reduced-motion) {
     animation: none;
@@ -546,6 +547,7 @@ body {
   background: var(--secondary);
   border-bottom: 0.4rem solid transparent;
   position: relative;
+  padding-bottom: 0;
 }
 
 .section-viewport--home {
@@ -581,13 +583,14 @@ body {
   resize: none;
   scroll-padding-bottom: 1rem;
   scroll-padding-top: 1rem;
+  padding-top: 2.5rem !important;
 }
 
 .feedback-input-label {
   border: none !important;
 
   &::after {
-    display: none;
+    background-color: transparent !important;
   }
 }
 
@@ -606,6 +609,7 @@ body {
 .section-viewport--about-us {
   position: relative;
   background: url('@assets/svg/shape_2.svg') 18rem bottom / cover no-repeat;
+  border-bottom: none;
 
   @include media-breakpoint-up(sm) {
     background-position: 40rem center;
@@ -691,9 +695,9 @@ body {
 .home-section-emodji {
   text-align: center;
   margin-bottom: auto;
-  font-size: 20dvh;
+  font-size: 20svh;
   animation: anim1 1s 3.5s both;
-  padding: 4dvh 0;
+  padding: 4svh 0;
 
   @media (prefers-reduced-motion) {
     animation: none;
@@ -812,7 +816,7 @@ body {
 }
 
 .about-us-img {
-  max-height: 50dvh;
+  height: 50svh;
 
   @include media-breakpoint-up(md) {
     margin-bottom: 0;
@@ -968,9 +972,13 @@ body {
 .footer {
   min-height: auto;
   background-color: var(--secondary);
-  background: url('@assets/svg/bg_2.svg') center / cover fixed;
+  background: url('@assets/svg/bg_2.svg') center / cover;
   color: var(--white);
   border-bottom: none;
+
+  .safari & {
+    background: var(--secondary);
+  }
 
   @include media-breakpoint-up(md) {
     animation: bgHeader 100s linear infinite alternate;
@@ -1014,6 +1022,7 @@ body {
   width: max-content;
   padding: .5rem 2rem .5rem 0;
   letter-spacing: .1rem;
+  min-height: 4rem;
 
   @include media-breakpoint-up(md) {
     font-size: 1.6rem;
@@ -1035,6 +1044,10 @@ body {
 .footer-copyright-section {
   border-top: 0.1rem var(--color-4) solid;
   backdrop-filter: blur(2px);
+
+  .safari & {
+    backdrop-filter: none;
+  }
 }
 
 .footer-flicker {
@@ -1113,6 +1126,7 @@ body {
   border-radius: 50%;
   position: fixed;
   top: -5vh;
+  will-change: opacity filter transform;
 }
 
 .snowflake-wrapper {

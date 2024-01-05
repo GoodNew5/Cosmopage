@@ -4,13 +4,7 @@ import BrowserDetector from 'browser-dtector'
 import Toast from 'bootstrap/js/dist/toast'
 import Collapse from 'bootstrap/js/dist/collapse'
 import './formValidator'
-import {
-  IS_REDUCE_MOTION,
-  isMd,
-  isReduceMotion,
-  isToLg,
-  isToMd
-} from './breakpoints'
+import { IS_REDUCE_MOTION, isMd, isReduceMotion, isToLg, isToMd } from './breakpoints'
 
 const INITIAL_SECTION = 'contact-us-section'
 
@@ -19,9 +13,7 @@ let stickyHeaderHeight = 0
 let bsCollapseInstance
 
 function handleNavLink(event: JQuery.MouseEventBase) {
-  const targetSection = (
-    event.currentTarget as HTMLAnchorElement
-  )?.getAttribute('href')
+  const targetSection = (event.currentTarget as HTMLAnchorElement)?.getAttribute('href')
 
   if (targetSection) {
     scrollToSection(targetSection)
@@ -67,17 +59,6 @@ function animateCards(typeAnimation: 'show' | 'hide') {
   })
 }
 
-function handleAnimationSection(element: JQuery) {
-  if (isReduceMotion || element.hasClass('section-viewport--visible')) {
-    const dataSectionValue = element.attr('data-section')
-
-    if (dataSectionValue) {
-      setUrlParamsSection(dataSectionValue)
-      setActiveNavLink(undefined, dataSectionValue)
-    }
-  }
-}
-
 function handleNavigation(event: JQuery.MouseEventBase) {
   event.preventDefault()
 
@@ -96,14 +77,11 @@ function handleNavigation(event: JQuery.MouseEventBase) {
 
 function setActiveNavLink(event?: JQuery.MouseEventBase, href?: string) {
   const link = event?.currentTarget
-  const targetSection =
-    (link as HTMLAnchorElement)?.getAttribute('href') || href
+  const targetSection = (link as HTMLAnchorElement)?.getAttribute('href') || href
 
   removeActiveClassNavLinks()
 
-  $(`a[href^="${targetSection || getSectionUrlParams()}"]`).addClass(
-    'nav-link--active'
-  )
+  $(`a[href^="${targetSection || getSectionUrlParams()}"]`).addClass('nav-link--active')
 }
 
 function removeActiveClassNavLinks() {
@@ -186,13 +164,9 @@ $(function () {
     }
 
     return (
-      (elemHeight > windowHeight - stickyHeaderHeight &&
-        elemTop <= scrollTop &&
-        elemBottom >= windowHeightIncludingScroll) ||
-      (elemTop >= scrollTop &&
-        elemTop < windowHeightIncludingScroll - stickyHeaderHeight) ||
-      (elemBottom - stickyHeaderHeight > scrollTop &&
-        elemBottom <= windowHeightIncludingScroll)
+      (elemHeight > windowHeight - stickyHeaderHeight && elemTop <= scrollTop && elemBottom >= windowHeightIncludingScroll) ||
+      (elemTop >= scrollTop && elemTop < windowHeightIncludingScroll - stickyHeaderHeight) ||
+      (elemBottom - stickyHeaderHeight > scrollTop && elemBottom <= windowHeightIncludingScroll)
     )
   }
 
@@ -211,15 +185,20 @@ $(function () {
       if (isSectionInViewport($el)) {
         clearTimeout(scrollTimeout)
 
+        if (currentSection) {
+          $html.addClass(currentSection)
+        }
+
+        if (!isReduceMotion && isContactUsSection) {
+          animateCards('show')
+        }
+
         scrollTimeout = setTimeout(function () {
-          if (currentSection) {
-            $html.addClass(currentSection)
-          }
-
-          handleAnimationSection($el)
-
-          if (!isReduceMotion && isContactUsSection) {
-            animateCards('show')
+          if (isReduceMotion || $el.hasClass('section-viewport--visible')) {
+            if (currentSection) {
+              setUrlParamsSection(currentSection)
+              setActiveNavLink(undefined, currentSection)
+            }
           }
         }, 100)
 
@@ -315,9 +294,7 @@ $(function () {
       clearFormValues()
       resetState()
 
-      const toastEl = document.getElementById(
-        'message-successfully-sended-toast'
-      )
+      const toastEl = document.getElementById('message-successfully-sended-toast')
 
       if (toastEl) {
         const toastBootstrap = Toast.getOrCreateInstance(toastEl, {
