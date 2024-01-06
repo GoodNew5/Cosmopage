@@ -468,13 +468,11 @@ body {
 
   @media (prefers-reduced-motion) {
     opacity: 1;
-    will-change: none;
     transition: none;
   }
 
   .section-viewport--visible & {
     transition: none;
-    will-change: opacity;
   }
 }
 
@@ -519,11 +517,9 @@ body {
 
 .section-viewport--visible {
   animation: anim1 0.5s both;
-  will-change: opacity;
 
   @media (prefers-reduced-motion) {
     animation: none;
-    will-change: none;
   }
 }
 
@@ -744,7 +740,12 @@ body {
   @include media-breakpoint-up(lg) {
     font-size: 8rem;
   }
+}
 
+.portfolio-column {
+  @include media-breakpoint-up(lg) {
+    justify-content: center;
+  }
 }
 
 .feedback-input-message-wrapper {
@@ -963,7 +964,6 @@ body {
   border: .1rem var(--secondary) solid;
   border-radius: .5rem;
   font-size: 2rem;
-  will-change: opacity;
 
   @include media-breakpoint-up(lg) {
     font-size: 2rem;
@@ -972,7 +972,6 @@ body {
 
   @media (prefers-reduced-motion) {
     animation: none;
-    will-change: none;
   }
 }
 
@@ -986,7 +985,6 @@ body {
   min-height: auto;
   background-color: var(--secondary);
   background: url('@assets/svg/bg_2.svg') center / cover;
-  will-change: background;
   color: var(--white);
   border-bottom: none;
 
@@ -1000,7 +998,6 @@ body {
 
   @media (prefers-reduced-motion) {
     animation: none;
-    will-change: none;
   }
 }
 

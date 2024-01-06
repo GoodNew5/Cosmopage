@@ -204,8 +204,6 @@ $(function () {
 
   const { isSafari, platform } = browser.parseUserAgent()
 
-  console.log(browser.parseUserAgent())
-
   if (isSafari) {
     $html.addClass('safari')
   }
