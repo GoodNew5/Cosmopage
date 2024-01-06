@@ -1,5 +1,4 @@
 import './scss/main.scss'
-// import './assets/svg/logo.svg'
 import BrowserDetector from 'browser-dtector'
 import Toast from 'bootstrap/js/dist/toast'
 import Collapse from 'bootstrap/js/dist/collapse'
@@ -7,7 +6,6 @@ import './formValidator'
 import { IS_REDUCE_MOTION, isMd, isReduceMotion, isToLg, isToMd } from './breakpoints'
 
 const INITIAL_SECTION = 'contact-us-section'
-
 let scrollTimeout: ReturnType<typeof setTimeout>
 let stickyHeaderHeight = 0
 let bsCollapseInstance
@@ -48,47 +46,14 @@ function getInitialSectionName() {
 }
 
 function animateCards(typeAnimation: 'show' | 'hide') {
-  $('.card--js').each(function (index) {
+  $('.card--js').each(function (index, card) {
     if (typeAnimation === 'show') {
-      $(this)
+      $(card)
         .delay(500 * index)
         .animate({ opacity: 1 }, 500)
     } else {
-      $(this).stop().clearQueue().removeAttr('style')
+      $(card).stop().clearQueue().removeAttr('style')
     }
-  })
-}
-
-function handleNavigation(event: JQuery.MouseEventBase) {
-  event.preventDefault()
-
-  bsCollapseInstance?.hide()
-  handleNavLink(event)
-
-  if (isReduceMotion) {
-    const href = $(event.currentTarget).attr('href')
-
-    if (href) {
-      setUrlParamsSection(href)
-      setActiveNavLink(event)
-    }
-  }
-}
-
-function setActiveNavLink(event?: JQuery.MouseEventBase, href?: string) {
-  const link = event?.currentTarget
-  const targetSection = (link as HTMLAnchorElement)?.getAttribute('href') || href
-
-  removeActiveClassNavLinks()
-
-  $(`a[href^="${targetSection || getSectionUrlParams()}"]`).addClass('nav-link--active')
-}
-
-function removeActiveClassNavLinks() {
-  const $navLinkElement = $('.nav-link--js')
-
-  $navLinkElement.each((index, currentElement) => {
-    $(currentElement).removeClass('nav-link--active')
   })
 }
 
@@ -137,12 +102,7 @@ const validationFields = [
 
 $(function () {
   const $window = $(window)
-  const $fieldName = $('input[name="input-feedback-name--js"]')
-  const $fieldEmail = $('input[name="input-feedback-email--js"]')
-  const $fieldMessage = $('textarea[name="input-feedback-message--js"]')
   const $navLinkElement = $('.nav-link--js')
-  const $form = $('.landing-page-form--js')
-  const formValidator = $form.validator(validationFields)
   const initialSectionName = getInitialSectionName()
   const browser = new BrowserDetector(window.navigator.userAgent)
   const $html = $('html')
@@ -168,10 +128,6 @@ $(function () {
       (elemTop >= scrollTop && elemTop < windowHeightIncludingScroll - stickyHeaderHeight) ||
       (elemBottom - stickyHeaderHeight > scrollTop && elemBottom <= windowHeightIncludingScroll)
     )
-  }
-
-  function setCurrentSectionClass(targetSection: string) {
-    $html.addClass(targetSection)
   }
 
   function handlePageScroll() {
@@ -219,12 +175,43 @@ $(function () {
     })
   }
 
-  browser.parseUserAgent()
+  function setActiveNavLink(event?: JQuery.MouseEventBase, href?: string) {
+    const link = event?.currentTarget
+    const targetSection = (link as HTMLAnchorElement)?.getAttribute('href') || href
 
-  const { isSafari } = browser.parseUserAgent()
+    $navLinkElement.each((index, currentElement) => {
+      $(currentElement).removeClass('nav-link--active')
+    })
+
+    $(`a[href^="${targetSection || getSectionUrlParams()}"]`).addClass('nav-link--active')
+  }
+
+  function handleNavigation(event: JQuery.MouseEventBase) {
+    event.preventDefault()
+
+    bsCollapseInstance?.hide()
+    handleNavLink(event)
+
+    if (isReduceMotion) {
+      const href = $(event.currentTarget).attr('href')
+
+      if (href) {
+        setUrlParamsSection(href)
+        setActiveNavLink(event)
+      }
+    }
+  }
+
+  const { isSafari, platform } = browser.parseUserAgent()
+
+  console.log(browser.parseUserAgent())
 
   if (isSafari) {
     $html.addClass('safari')
+  }
+
+  if (platform === 'Microsoft Windows') {
+    $html.addClass('win')
   }
 
   if (isToLg) {
@@ -235,14 +222,25 @@ $(function () {
     bsCollapseInstance = null
   }
 
-  setCurrentSectionClass(initialSectionName)
+  $html.addClass(initialSectionName)
   setUrlParamsSection(initialSectionName)
   scrollToSection(initialSectionName)
   setActiveNavLink()
   handlePageScroll()
 
+  const $form = $('.landing-page-form--js')
+  const formValidator = $form.validator(validationFields)
+  const $fieldName = $('input[name="input-feedback-name--js"]')
+  const $fieldEmail = $('input[name="input-feedback-email--js"]')
+  const $fieldMessage = $('textarea[name="input-feedback-message--js"]')
+
   async function sendFeedbackForm(event: JQuery.MouseEventBase) {
     const $buttonSubmit = $(event.currentTarget)
+
+    function enableButton() {
+      $buttonSubmit.removeAttr('disabled')
+      $form.removeClass('feedback-form-is-loading')
+    }
 
     try {
       const name = $fieldName.val()
@@ -262,22 +260,14 @@ $(function () {
         }
       })
 
-      $buttonSubmit.removeAttr('disabled')
-      $form.removeClass('feedback-form-is-loading')
+      enableButton()
 
       return result
     } catch (error) {
-      $buttonSubmit.prop('disabled', false)
-      $form.removeClass('feedback-form-is-loading')
+      enableButton()
 
       console.log(error)
     }
-  }
-
-  function clearFormValues() {
-    $fieldName.val('')
-    $fieldEmail.val('')
-    $fieldMessage.val('')
   }
 
   async function handleFormSubmit(event: JQuery.MouseEventBase) {
@@ -291,7 +281,10 @@ $(function () {
     const result = await sendFeedbackForm(event)
 
     if (result?.id) {
-      clearFormValues()
+      $fieldName.val('')
+      $fieldEmail.val('')
+      $fieldMessage.val('')
+
       resetState()
 
       const toastEl = document.getElementById('message-successfully-sended-toast')
@@ -307,13 +300,9 @@ $(function () {
     }
   }
 
-  IS_REDUCE_MOTION.addEventListener('change', function () {
-    handlePageScroll()
-  })
-
+  IS_REDUCE_MOTION.addEventListener('change', handlePageScroll)
   $navLinkElement.on('click', handleNavigation)
   $window.on('scroll resize', handlePageScroll)
-
   $('.button-touch-effect--js').on('click', setRippleButtonPosition)
   $('.btn-feedback-form-submit--js').on('click', handleFormSubmit)
 })

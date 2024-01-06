@@ -306,10 +306,10 @@ body {
 }
 
 .comsompage {
-  transform: translateY(9rem);
+  padding-top: 9rem;
 
   @include media-breakpoint-up(md) {
-    transform: translateY(14rem);
+    padding-top: 14rem;
   }
 }
 
@@ -464,17 +464,17 @@ body {
 
   overflow: hidden;
   opacity: 0;
-  will-change: opacity;
   transition: cubic-bezier(1, 0, 0, 1) 0.3s;
 
   @media (prefers-reduced-motion) {
     opacity: 1;
-    will-change: auto;
+    will-change: none;
     transition: none;
   }
 
   .section-viewport--visible & {
     transition: none;
+    will-change: opacity;
   }
 }
 
@@ -495,7 +495,6 @@ body {
 
 .section-viewport {
   min-height: calc(100svh - 9rem);
-  will-change: opacity;
   padding: 2rem 0;
   border-bottom: 0.1rem var(--color-4) solid;
   scroll-snap-align: start;
@@ -520,9 +519,11 @@ body {
 
 .section-viewport--visible {
   animation: anim1 0.5s both;
+  will-change: opacity;
 
   @media (prefers-reduced-motion) {
     animation: none;
+    will-change: none;
   }
 }
 
@@ -692,7 +693,7 @@ body {
   right: -1.4rem;
 }
 
-.home-section-emodji {
+.home-section-emoji {
   text-align: center;
   margin-bottom: auto;
   font-size: 20svh;
@@ -701,6 +702,16 @@ body {
 
   @media (prefers-reduced-motion) {
     animation: none;
+  }
+
+  &::before {
+    content: '🥷'
+  }
+
+  .win & {
+    &:before {
+      content: '👨🏻‍🚀'
+    }
   }
 }
 
@@ -952,6 +963,7 @@ body {
   border: .1rem var(--secondary) solid;
   border-radius: .5rem;
   font-size: 2rem;
+  will-change: opacity;
 
   @include media-breakpoint-up(lg) {
     font-size: 2rem;
@@ -960,6 +972,7 @@ body {
 
   @media (prefers-reduced-motion) {
     animation: none;
+    will-change: none;
   }
 }
 
@@ -973,6 +986,7 @@ body {
   min-height: auto;
   background-color: var(--secondary);
   background: url('@assets/svg/bg_2.svg') center / cover;
+  will-change: background;
   color: var(--white);
   border-bottom: none;
 
@@ -986,6 +1000,7 @@ body {
 
   @media (prefers-reduced-motion) {
     animation: none;
+    will-change: none;
   }
 }
 
@@ -1126,7 +1141,6 @@ body {
   border-radius: 50%;
   position: fixed;
   top: -5vh;
-  will-change: opacity filter transform;
 }
 
 .snowflake-wrapper {
