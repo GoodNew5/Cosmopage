@@ -210,7 +210,7 @@ $(function () {
     $html.addClass('safari')
   }
 
-  if (platform === 'Microsoft Windows') {
+  if (platform === 'Windows') {
     $html.addClass('win')
   }
 
