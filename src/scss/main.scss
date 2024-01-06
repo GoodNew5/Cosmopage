@@ -829,6 +829,7 @@ body {
 
 .about-us-img {
   height: 50svh;
+  object-fit: contain;
 
   @include media-breakpoint-up(md) {
     margin-bottom: 0;
