@@ -486,8 +486,11 @@ body {
   object-position: center;
   height: 50rem;
   position: relative;
-  will-change: filter;
   filter: contrast(0.6);
+
+  .safari & {
+    will-change: filter;
+  }
 }
 
 .section-viewport {
