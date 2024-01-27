@@ -463,7 +463,6 @@ body {
   --bs-card-spacer-y: 2rem;
 
   overflow: hidden;
-  opacity: 0;
   transition: cubic-bezier(1, 0, 0, 1) 0.3s;
 
   @media (prefers-reduced-motion) {
@@ -838,7 +837,7 @@ body {
 }
 
 .about-us-section-badge--jquery {
-  animation: flash 1s 1.5s both;
+  animation: flash 1s both;
 
   @include media-breakpoint-up(lg) {
     top: 4rem;
@@ -847,7 +846,7 @@ body {
 }
 
 .about-us-section-badge--bootstrap {
-  animation: flash 1s 2s both;
+  animation: flash 1s .5s both;
 
   @include media-breakpoint-up(lg) {
     top: 8rem;
@@ -856,7 +855,7 @@ body {
 }
 
 .about-us-section-badge--vue  {
-  animation: flash 1s 2.5s both;
+  animation: flash 1s 1s both;
 
   @include media-breakpoint-up(lg) {
     top: 25rem;
@@ -865,7 +864,7 @@ body {
 }
 
 .about-us-section-badge--scss  {
-  animation: flash 1s 3s both;
+  animation: flash 1s 2s both;
 
   @include media-breakpoint-up(lg) {
     top: 20rem;
@@ -874,7 +873,7 @@ body {
 }
 
 .about-us-section-badge--react {
-  animation: flash 1s 3.5s both;
+  animation: flash 1s 2.5s both;
 
   @include media-breakpoint-up(lg) {
     top: 35rem;
@@ -887,7 +886,7 @@ body {
 }
 
 .icon-skills--bs {
-  animation: flash 1s 2s both;
+  animation: flash 1s .5s both;
 
   @include media-breakpoint-up(lg) {
     top: 5rem;
@@ -896,7 +895,7 @@ body {
 }
 
 .icon-skills--ts {
-  animation: flash 1s 4s both;
+  animation: flash 1s 1.5s both;
 
   @include media-breakpoint-up(lg) {
     top: 19rem;
@@ -905,7 +904,7 @@ body {
 }
 
 .icon-skills--sass {
-  animation: flash 1s 3s both;
+  animation: flash 1s 2s both;
 
   @include media-breakpoint-up(lg) {
     top: 14rem;
@@ -914,7 +913,7 @@ body {
 }
 
 .icon-skills--mst {
-  animation: flash 1s 3.5s both;
+  animation: flash 1s 2.5s both;
 
   @include media-breakpoint-up(lg) {
     top: 28rem;
@@ -923,7 +922,7 @@ body {
 }
 
 .icon-skills--react {
-  animation: flash 1s 3.5s both;
+  animation: flash 1s 2.5s both;
 
   @include media-breakpoint-up(lg) {
     top: 32rem;
@@ -932,7 +931,7 @@ body {
 }
 
 .icon-skills--pinia {
-  animation: flash 1s 2.5s both;
+  animation: flash 1s 1s both;
 
   @include media-breakpoint-up(lg) {
     top: 28rem;

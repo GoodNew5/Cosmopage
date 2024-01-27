@@ -45,18 +45,6 @@ function getInitialSectionName() {
   return getSectionUrlParams() || INITIAL_SECTION
 }
 
-function animateCards(typeAnimation: 'show' | 'hide') {
-  $('.card--js').each(function (index, card) {
-    if (typeAnimation === 'show') {
-      $(card)
-        .delay(500 * index)
-        .animate({ opacity: 1 }, 500)
-    } else {
-      $(card).stop().clearQueue().removeAttr('style')
-    }
-  })
-}
-
 function validateEmail(email: string) {
   return !!String(email)
     .toLowerCase()
@@ -136,17 +124,12 @@ $(function () {
     $('.section-viewport--js').each((index, section) => {
       const $el = $(section)
       const currentSection = $el.attr('data-section')
-      const isContactUsSection = $el.hasClass('contact-us-section--js')
 
       if (isSectionInViewport($el)) {
         clearTimeout(scrollTimeout)
 
         if (currentSection) {
           $html.addClass(currentSection)
-        }
-
-        if (!isReduceMotion && isContactUsSection) {
-          animateCards('show')
         }
 
         scrollTimeout = setTimeout(function () {
@@ -165,10 +148,6 @@ $(function () {
         $html.removeClass(currentSection)
 
         if (!isReduceMotion) {
-          if (isContactUsSection) {
-            animateCards('hide')
-          }
-
           $el.removeClass(visibleClass)
         }
       }
